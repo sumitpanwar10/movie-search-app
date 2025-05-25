@@ -1,15 +1,22 @@
-export default function toggleFavorite({setIsFavorite, movie, }: {setIsFavorite: (value: boolean) => void, movie: any, imdbID: string}) {
-    const stored = JSON.parse(localStorage.getItem('favorites') || '[]')
-    const exists = stored.some((m: any) => m.imdbID === movie.imdbID)
+import { Dispatch, SetStateAction } from 'react'
+import { MovieSearchItem } from '@/types/MovieSearchResult'
+import { MovieDetails } from '@/types/MovieDetails'
 
-    if (exists) {
-      // Remove from favorites
-      const updated = stored.filter((m: any) => m.imdbID !== movie.imdbID)
-      localStorage.setItem('favorites', JSON.stringify(updated))
-      setIsFavorite(false)
-    } else {
-      // Add to favorites
-      localStorage.setItem('favorites', JSON.stringify([...stored, movie]))
-      setIsFavorite(true)
-    }
+type ToggleFavoriteParams = {
+  setIsFavorite: Dispatch<SetStateAction<boolean>>
+  movie: MovieSearchItem | MovieDetails
+}
+
+export default function toggleFavorite({ setIsFavorite, movie }: ToggleFavoriteParams) {
+  const stored: (MovieSearchItem | MovieDetails)[] = JSON.parse(localStorage.getItem('favorites') || '[]')
+  const exists = stored.some((m) => m.imdbID === movie.imdbID)
+
+  if (exists) {
+    const updated = stored.filter((m) => m.imdbID !== movie.imdbID)
+    localStorage.setItem('favorites', JSON.stringify(updated))
+    setIsFavorite(false)
+  } else {
+    localStorage.setItem('favorites', JSON.stringify([...stored, movie]))
+    setIsFavorite(true)
   }
+}

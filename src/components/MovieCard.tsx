@@ -1,7 +1,9 @@
 import Link from 'next/link'
 import MovieImage from './MovieImage'
 import AddFavorite from './AddFavorite'
-export default function MovieCard({ movie }: { movie: any }) {
+import { MovieCardProps } from '@/types/MovieCardProps'
+
+export default function MovieCard({ movie }: MovieCardProps) {
   const { Title, Poster, Year, imdbID } = movie
 
   return (

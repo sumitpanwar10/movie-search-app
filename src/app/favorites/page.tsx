@@ -2,13 +2,21 @@
 
 import { useEffect, useState } from 'react'
 import Results from '@/components/Results'
+import { FavoriteMovie } from '@/types/FavoriteMovie'
 
 export default function FavoritesPage() {
-  const [favorites, setFavorites] = useState<any[]>([])
+  const [favorites, setFavorites] = useState<FavoriteMovie[]>([])
 
   useEffect(() => {
     const storedItems = localStorage.getItem('favorites')
-    if (storedItems) setFavorites(JSON.parse(storedItems))
+    if (storedItems) {
+      try {
+        const parsed: FavoriteMovie[] = JSON.parse(storedItems)
+        setFavorites(parsed)
+      } catch (error) {
+        console.error('Failed to parse favorites from localStorage:', error)
+      }
+    }
   }, [])
 
   return (

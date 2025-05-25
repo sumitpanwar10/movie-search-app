@@ -1,15 +1,8 @@
 'use client'
+import { PaginationProps } from '@/types/PaginationProps'
 import Link from 'next/link'
 
-export default function Pagination({
-  totalResults,
-  currentPage,
-  query,
-}: {
-  totalResults: number
-  currentPage: number
-  query: string
-}) {
+export default function Pagination({ totalResults, currentPage, query }: PaginationProps) {
   const totalPages = Math.ceil(Number(totalResults) / 10)
 
   if (totalPages <= 1) return null
