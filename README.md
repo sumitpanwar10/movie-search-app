@@ -1,6 +1,11 @@
 This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
 
 ## Getting Started
+Add a .env.local file and add your API key as below:
+`OMDB_API_KEY=[Your API Key]`
+
+To check demo:
+[`click here`](https://movie-search-app-swart-eight.vercel.app)
 
 First, run the development server:
 
