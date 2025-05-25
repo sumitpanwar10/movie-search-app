@@ -11,6 +11,7 @@ export default function toggleFavorite({ setIsFavorite, movie }: ToggleFavoriteP
   const stored: (MovieSearchItem | MovieDetails)[] = JSON.parse(localStorage.getItem('favorites') || '[]')
   const exists = stored.some((m) => m.imdbID === movie.imdbID)
 
+  // If the movie already exists in favorites, remove it; otherwise, add it
   if (exists) {
     const updated = stored.filter((m) => m.imdbID !== movie.imdbID)
     localStorage.setItem('favorites', JSON.stringify(updated))
